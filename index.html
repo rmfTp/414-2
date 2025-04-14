@@ -18,10 +18,6 @@
         <div class="container">
             <div class="d-flex justify-content-start align-items-center ">
                 <span class="navbar-brand " >
-                    <svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-calendar-event" viewBox="0 0 16 16">
-                        <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
-                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
-                    </svg>
                     토론 게시판
                 </span>
                 <a class="nav-link ms-5 text-bg-dark" href="#dscs-regist">토론 등록</a>
@@ -29,21 +25,17 @@
             </div>
         </div>
     </nav>
+    <h2>자유토론 목록</h2>
+    <div class="accordion" id="dscs-items"></div>
 
     <div class="container">
         <h2 class="mt-2">토론 등록하기</h2>
         <form id="dscs-regist" name="frmRegist" autocomplete="off" class="mb-5">  
-            <div class="mb-3">
-                <label for="dscs-user">작성자</label>
-                <input type="text" id="dscs-user" name="user" class="form-control" placeholder="작성자를 입력하세요.">
+            <div class="mb-2">
+                <input type="text" id="dscs-user" name="user" class="form-control" placeholder="작성자">
             </div>
-            <div class="mb-3">
-                <label for="dscs-date" class='form-label'>작성일자</label>
-                <input type="date" id="dscs-date" name="date" class="form-control" placeholder="날짜를 선택하세요.">
-            </div>
-            <div class="mb-3">
-                <label for="dscs-content" class="form-label">내용</label>
-                <div id="dscs-content" class="border" ></div>
+            <div class="mb-2">
+                <div id="dscs-content" class="border" >내용을 입력해주세요</div>
             </div>
             <div class="d-flex justify-content-end">
                 <button id="submit-btn" type="submit" class="btn btn-lg btn-primary">
@@ -52,8 +44,6 @@
             </div>
         </form>
 
-        <h2>자유토론 목록</h2>
-        <div class="accordion" id="dscs-items"></div>
         <!--// accordion -->
     </div>
 
@@ -62,7 +52,6 @@
             <div class="accordion-header">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#dscs-item#{seq}" aria-expanded="true" aria-controls="dscs-item#{seq}">
                     <span class="badge text-bg-info me-2">#{user}</span>
-                    #{date}
                 </button>
             </div>
             <div id="dscs-item#{seq}" class="accordion-collapse collapse" data-bs-parent="#dscs-items">
