@@ -24,19 +24,11 @@ const dscs = {
     /**
      * 토론 등록 처리
      *
-     * @param {*} data : 등록 양식 데이터, date 날짜, user 작성자, content: 내용
+     * @param {*} data : 등록 양식 데이터, user 작성자, content: 내용
      *
      */
     add(item) {
       // 토론 목록 날짜별 내림 차순으로 정렬 처리
-      if (this.items.length > 0) {
-        this.items.sort((i1, i2) => {
-          const date1 = new Date(i1.date)
-          const date2 = new Date(i2.date)
-          return date2 - date1
-        })
-      }
-  
       this.items.push(item)
   
       this.save() // 변경 사항 저장 처리
@@ -98,11 +90,10 @@ const dscs = {
       setTimeout(() => {
         targetEl.innerHTML = ''
   
-        this.items.forEach(({ seq, date, user, content }) => {
+        this.items.forEach(({ seq, user, content }) => {
           let html = dscs.tpl
           html = html
             .replace(/#{seq}/g, seq)
-            .replace(/#{date}/g, date)
             .replace(/#{user}/g, user)
             .replace(/#{content}/g, content)
           const dom = domParser.parseFromString(html, 'text/html')
@@ -122,7 +113,6 @@ const dscs = {
           const editEl = el.querySelector('.edit')
           editEl.addEventListener('click', () => {
             // 해당 항목 내용 폼에 채워넣기
-            frmRegist.date.value = date
             frmRegist.user.value = user
   
             const htmlContent = el.querySelector('.dscs-content')?.innerHTML || ''
@@ -164,9 +154,9 @@ const dscs = {
        * 유효성 검사 -  필수항목 (날짜, 작성자, 내용)
        */
       const requiredFields = {
-        date: '날짜를 입력하세요.',
         user: '작성자를 입력하세요.',
       }
+      const date = Date.now()
       const errors = [],
         item = { seq: Date.now() }
   
@@ -228,7 +218,6 @@ const dscs = {
       // 등록 완료 후 초기화
       dscs.quill.root.innerHTML = ''
       frmRegist.user.value = ''
-      frmRegist.date.value = ''
     })
     
   })
